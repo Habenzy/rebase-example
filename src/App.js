@@ -60,19 +60,18 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
-        <Link to="/login">Login</Link>
-      </div>
+
       <Switch>
         <Route
           exact
-          path="/"
+          path="/dashboard"
           render={(props) => {
             return <Dashboard user={user} />;
           }}
         />
         <Route
-          path="/login"
+        exact
+          path="/"
           render={(props) => {
             return (
               <Login

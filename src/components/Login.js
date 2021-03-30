@@ -27,7 +27,8 @@ function Login(props) {
         <input type='submit' />
       </form>
       <button onClick={props.googleLogin}>Login with Google</button>
-      {props.user && <Link to='/' >Go to Dashboard</Link>}
+
+      {props.user && <Link to='/dashboard' >Go to Dashboard</Link>}
     </div>
   )
 }
