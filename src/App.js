@@ -15,6 +15,8 @@ var firebaseConfig = {
   appId: "1:111109385265:web:e404cc2ae5d06b2d3b7910",
 };
 
+let provider = new firebase.auth.GoogleAuthProvider();
+
 firebase.initializeApp(firebaseConfig);
 
 function App() {
@@ -26,12 +28,31 @@ function App() {
       .signInWithEmailAndPassword(email, password)
       .then((userObj) => {
         // Signed in
-        setUser(userObj)
+        setUser(userObj);
         // ...
       })
       .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
+      });
+  }
+
+  function googleLogin() {
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        setUser(result.user);
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        let errorCode = error.code;
+        let errorMessage = error.message;
+        // The email of the user's account used.
+        let email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        let credential = error.credential;
+        // ...
       });
   }
 
@@ -53,7 +74,13 @@ function App() {
         <Route
           path="/login"
           render={(props) => {
-            return <Login loginPass={loginPass} user={user}/>;
+            return (
+              <Login
+                loginPass={loginPass}
+                user={user}
+                googleLogin={googleLogin}
+              />
+            );
           }}
         />
       </Switch>

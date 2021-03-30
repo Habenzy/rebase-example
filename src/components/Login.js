@@ -26,7 +26,7 @@ function Login(props) {
         <input type='password' value={passVal} onChange={handleInput} />
         <input type='submit' />
       </form>
-      <button>Login with Google</button>
+      <button onClick={props.googleLogin}>Login with Google</button>
       {props.user && <Link to='/' >Go to Dashboard</Link>}
     </div>
   )
